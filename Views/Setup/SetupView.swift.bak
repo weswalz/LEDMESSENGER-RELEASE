@@ -1,0 +1,796 @@
+//
+//  SetupView.swift
+//  LEDMESSENGER
+//
+//  Created by Claude AI on 4/12/2025.
+//
+
+import SwiftUI
+
+/// Setup page enum
+enum SetupPage: Int, CaseIterable {
+    case connection = 0   // IP and port settings
+    case clipSetup = 1    // Slots, layer, T-boxes
+    case formatting = 2   // Line break settings
+    
+    var title: String {
+        switch self {
+        case .connection: return "CONNECTION SETUP"
+        case .clipSetup: return "CLIP CONFIGURATION"
+        case .formatting: return "TEXT FORMATTING"
+        }
+    }
+}
+
+/// View for setting up the application
+struct SetupView: View {
+    @ObservedObject var viewModel: AppViewModel
+    
+    // Setup page
+    @State private var currentPage: SetupPage = .connection
+    
+    // Local state for form editing
+    @State private var ipAddress: String
+    @State private var port: String
+    @State private var layer: String
+    @State private var startingClip: String
+    @State private var clearClip: String
+    @State private var isConnecting = false
+    
+    // Line break formatting settings
+    @State private var lineBreakMode: LineBreakMode
+    @State private var maxCharsPerLine: Int
+    @State private var wordsPerLine: Int
+    
+    // Initialize with view model
+    init(viewModel: AppViewModel) {
+        self.viewModel = viewModel
+        
+        // Initialize state from settings
+        _ipAddress = State(initialValue: viewModel.settingsManager.settings.osc.ipAddress)
+        _port = State(initialValue: String(viewModel.settingsManager.settings.osc.port))
+        _layer = State(initialValue: String(viewModel.settingsManager.settings.osc.layer))
+        _startingClip = State(initialValue: String(viewModel.settingsManager.settings.osc.startingClip))
+        _clearClip = State(initialValue: String(viewModel.settingsManager.settings.osc.clearClip))
+        
+        // Initialize formatting settings
+        _lineBreakMode = State(initialValue: viewModel.settingsManager.settings.formatting.lineBreakMode)
+        _maxCharsPerLine = State(initialValue: viewModel.settingsManager.settings.formatting.maxCharsPerLine)
+        _wordsPerLine = State(initialValue: viewModel.settingsManager.settings.formatting.wordsPerLine)
+    }
+    
+    var body: some View {
+        VStack(spacing: 20) {
+            // Logo and Page Title
+            VStack(spacing: 5) {
+                // Logo
+                Image("ledmlogo")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 120, height: 120)
+                
+                // Page title
+                Text(currentPage.title)
+                    .font(.system(size: 24, weight: .bold))
+                    .foregroundColor(.white)
+                    .tracking(1.5)
+                    .shadow(color: Theme.accentPurple.opacity(0.7), radius: 3, x: 0, y: 0)
+                
+                // Connection status (only on connection page)
+                if currentPage == .connection {
+                    HStack(spacing: 8) {
+                        Circle()
+                            .fill(viewModel.connectionStatus == .connected ? Theme.successGreen : Color.gray)
+                            .frame(width: 12, height: 12)
+                            .shadow(color: viewModel.connectionStatus == .connected ? Theme.successGreen.opacity(0.6) : Color.clear, radius: 4)
+                        
+                        Text("RESOLUME \(viewModel.connectionStatus == .connected ? "CONNECTED" : "DISCONNECTED")")
+                            .font(.system(size: 14, weight: .semibold))
+                            .foregroundColor(viewModel.connectionStatus == .connected ? Theme.successGreen : Color.gray)
+                    }
+                    .padding(.vertical, 8)
+                    .padding(.horizontal, 16)
+                    .background(Color.black.opacity(0.3))
+                    .cornerRadius(20)
+                }
+            }
+            .padding(.top, 20)
+            
+            // Page content
+            ScrollView {
+                switch currentPage {
+                case .connection:
+                    connectionPageContent
+                case .clipSetup:
+                    clipSetupPageContent
+                case .formatting:
+                    formattingPageContent
+                }
+            }
+            .frame(maxWidth: .infinity)
+            
+            Spacer()
+            
+            // Navigation buttons
+            HStack(spacing: 20) {
+                // Back button (hidden on first page)
+                if currentPage != .connection {
+                    Button {
+                        withAnimation {
+                            currentPage = SetupPage(rawValue: currentPage.rawValue - 1) ?? .connection
+                        }
+                    } label: {
+                        HStack {
+                            Image(systemName: "chevron.left")
+                            Text("BACK")
+                        }
+                        .font(.system(size: 16, weight: .semibold))
+                        .foregroundColor(.white)
+                        .padding(.horizontal, 24)
+                        .padding(.vertical, 14)
+                        .background(Theme.secondaryGradient)
+                        .cornerRadius(25)
+                    }
+                    .consistentMacOSStyle()
+                } else {
+                    // Empty spacer to maintain layout when back button is hidden
+                    Spacer()
+                }
+                
+                // Next/Finish button
+                Button {
+                    if currentPage == .formatting {
+                        // Save settings
+                        saveSettings()
+                        
+                        // Start connection process
+                        isConnecting = true
+                        viewModel.completeSetup()
+                    } else {
+                        withAnimation {
+                            currentPage = SetupPage(rawValue: currentPage.rawValue + 1) ?? .formatting
+                        }
+                    }
+                } label: {
+                    HStack {
+                        if currentPage == .formatting {
+                            Text(isConnecting ? "CONNECTING..." : "LET'S GO!")
+                        } else {
+                            Text("NEXT")
+                        }
+                        
+                        if currentPage != .formatting {
+                            Image(systemName: "chevron.right")
+                        }
+                    }
+                    .font(.system(size: 16, weight: .semibold))
+                    .foregroundColor(.white)
+                    .padding(.horizontal, 24)
+                    .padding(.vertical, 14)
+                    .background(Theme.primaryGradient)
+                    .cornerRadius(25)
+                }
+                .consistentMacOSStyle()
+                .disabled(isConnecting)
+                .opacity(isConnecting ? 0.7 : 1.0)
+            }
+            .padding(.horizontal, 20)
+            .padding(.bottom, 30)
+            
+            // Show connection status when connecting
+            if isConnecting {
+                Text(viewModel.setupStatusMessage)
+                    .font(.system(size: 16))
+                    .foregroundColor(Theme.accentPurple)
+                    .multilineTextAlignment(.center)
+                    .padding(.bottom, 20)
+            }
+        }
+        .background(Theme.backgroundGradient.edgesIgnoringSafeArea(.all))
+    }
+    
+    // MARK: - Page Content Views
+    
+    /// Connection page content
+    private var connectionPageContent: some View {
+        VStack(spacing: 25) {
+            // IP address input field
+            VStack(spacing: 6) {
+                Text("RESOLUME IP ADDRESS")
+                    .font(.system(size: 16, weight: .medium))
+                    .foregroundColor(Theme.textSecondary)
+                
+                TextField("Enter IP address", text: $ipAddress)
+                    .font(.system(size: 18, weight: .medium))
+                    .foregroundColor(.white)
+                    .multilineTextAlignment(.center)
+                    .padding()
+                    .frame(width: 220)
+                    .background(Color.black.opacity(0.3))
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 8)
+                            .stroke(Theme.accentPurple, lineWidth: 1.5)
+                            .shadow(color: Theme.accentPurple.opacity(0.5), radius: 3)
+                    )
+                    .cornerRadius(8)
+                    #if os(macOS)
+                    .textFieldStyle(PlainTextFieldStyle())
+                    #endif
+            }
+            
+            // Instructions
+            VStack(spacing: 15) {
+                Text("Make sure port \(port) is open in Resolume Preferences > OSC > OSC Input Port.")
+                    .font(.system(size: 14))
+                    .foregroundColor(Theme.textHighlight)
+                    .multilineTextAlignment(.center)
+                    .padding(.horizontal, 40)
+                    .padding(.vertical, 10)
+                    .background(Color.black.opacity(0.2))
+                    .cornerRadius(6)
+                
+                // Port input
+                HStack {
+                    Text("PORT:")
+                        .font(.system(size: 16, weight: .bold))
+                        .foregroundColor(.white)
+                    
+                    TextField("2269", text: $port)
+                        .font(.system(size: 16, weight: .medium))
+                        .foregroundColor(.white)
+                        .frame(width: 70)
+                        .multilineTextAlignment(.center)
+                        .padding(8)
+                        .background(Color.black.opacity(0.3))
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 8)
+                                .stroke(Theme.accentPurple, lineWidth: 1.5)
+                                .shadow(color: Theme.accentPurple.opacity(0.5), radius: 3)
+                        )
+                        .cornerRadius(8)
+                        #if os(macOS)
+                        .textFieldStyle(PlainTextFieldStyle())
+                        #endif
+                        .onChange(of: port) { newValue in
+                            // Keep only digits
+                            port = newValue.filter { $0.isNumber }
+                        }
+                }
+            }
+            .padding(.horizontal, 20)
+            
+            // Help text
+            Text("LED Messenger communicates with Resolume Arena via the OSC protocol. Enter the IP address of the computer running Resolume Arena.")
+                .font(.system(size: 14))
+                .foregroundColor(Theme.textSecondary)
+                .multilineTextAlignment(.center)
+                .padding(.horizontal, 40)
+                .padding(.top, 20)
+        }
+        .padding(.vertical, 20)
+    }
+    
+    /// Clip setup page content
+    private var clipSetupPageContent: some View {
+        VStack(spacing: 20) {
+            // Helpful instructions block
+            VStack(spacing: 12) {
+                Text("LED MESSENGER works by sending text to sequential text clips in Resolume on a single layer followed by a blank clip to clear the message.")
+                    .font(.system(size: 14))
+                    .foregroundColor(Theme.textSecondary)
+                    .multilineTextAlignment(.center)
+                    .padding(.horizontal, 40)
+                
+                let clipStart = Int(startingClip) ?? 1
+                Text("EXAMPLE: Layer \(layer) Slot \(startingClip) would use clips \(clipStart), \(clipStart+1), \(clipStart+2) with clip \(clipStart+3) automatically used to clear the message.")
+                    .font(.system(size: 14))
+                    .foregroundColor(Theme.textSecondary)
+                    .multilineTextAlignment(.center)
+                    .padding(.horizontal, 40)
+            }
+            .padding(.top, 10)
+            
+            // Purple outline boxes with "T" inside
+            HStack(spacing: 12) {
+                // Three boxes with "T"
+                ForEach(1...3, id: \.self) { _ in
+                    Text("T")
+                        .font(.system(size: 16, weight: .bold))
+                        .foregroundColor(.white)
+                        .frame(width: 38, height: 38)
+                        .background(Color.black.opacity(0.3))
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 4)
+                                .stroke(Theme.accentPurple, lineWidth: 1.5)
+                                .shadow(color: Theme.accentPurple.opacity(0.5), radius: 3)
+                        )
+                        .cornerRadius(4)
+                }
+                
+                // Empty box
+                Text("")
+                    .font(.system(size: 16, weight: .bold))
+                    .foregroundColor(.white)
+                    .frame(width: 38, height: 38)
+                    .background(Color.black.opacity(0.3))
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 4)
+                            .stroke(Theme.accentPurple, lineWidth: 1.5)
+                            .shadow(color: Theme.accentPurple.opacity(0.5), radius: 3)
+                    )
+                    .cornerRadius(4)
+            }
+            .padding(.vertical, 20)
+            
+            // Layer & Slot Selectors
+            HStack(spacing: 40) {
+                // Layer
+                VStack(spacing: 10) {
+                    Text("LAYER")
+                        .font(.system(size: 16, weight: .bold))
+                        .foregroundColor(.white)
+                    
+                    HStack {
+                        Button(action: {
+                            let layerNum = max(1, (Int(layer) ?? 5) - 1)
+                            layer = "\(layerNum)"
+                        }) {
+                            Image(systemName: "minus.circle.fill")
+                                .font(.system(size: 24))
+                                .foregroundColor(Theme.accentPurple)
+                        }
+                        .consistentMacOSStyle()
+                        
+                        Text(layer)
+                            .font(.system(size: 28, weight: .bold))
+                            .foregroundColor(.white)
+                            .frame(width: 50)
+                            .padding(6)
+                            .background(Color.black.opacity(0.3))
+                            .overlay(
+                                RoundedRectangle(cornerRadius: 8)
+                                    .stroke(Theme.accentPurple, lineWidth: 1.5)
+                                    .shadow(color: Theme.accentPurple.opacity(0.5), radius: 3)
+                            )
+                            .cornerRadius(8)
+                        
+                        Button(action: {
+                            let layerNum = min(20, (Int(layer) ?? 5) + 1)
+                            layer = "\(layerNum)"
+                        }) {
+                            Image(systemName: "plus.circle.fill")
+                                .font(.system(size: 24))
+                                .foregroundColor(Theme.accentPurple)
+                        }
+                        .consistentMacOSStyle()
+                    }
+                }
+                
+                // Starting Slot
+                VStack(spacing: 10) {
+                    Text("START SLOT")
+                        .font(.system(size: 16, weight: .bold))
+                        .foregroundColor(.white)
+                    
+                    HStack {
+                        Button(action: {
+                            let slotNum = max(1, (Int(startingClip) ?? 3) - 1)
+                            startingClip = "\(slotNum)"
+                            // Always set clear clip to startingClip + 3
+                            clearClip = "\(slotNum + 3)"
+                        }) {
+                            Image(systemName: "minus.circle.fill")
+                                .font(.system(size: 24))
+                                .foregroundColor(Theme.accentPurple)
+                        }
+                        .consistentMacOSStyle()
+                        
+                        Text(startingClip)
+                            .font(.system(size: 28, weight: .bold))
+                            .foregroundColor(.white)
+                            .frame(width: 50)
+                            .padding(6)
+                            .background(Color.black.opacity(0.3))
+                            .overlay(
+                                RoundedRectangle(cornerRadius: 8)
+                                    .stroke(Theme.accentPurple, lineWidth: 1.5)
+                                    .shadow(color: Theme.accentPurple.opacity(0.5), radius: 3)
+                            )
+                            .cornerRadius(8)
+                        
+                        Button(action: {
+                            let slotNum = min(50, (Int(startingClip) ?? 3) + 1)
+                            startingClip = "\(slotNum)"
+                            // Always set clear clip to startingClip + 3
+                            clearClip = "\(slotNum + 3)"
+                        }) {
+                            Image(systemName: "plus.circle.fill")
+                                .font(.system(size: 24))
+                                .foregroundColor(Theme.accentPurple)
+                        }
+                        .consistentMacOSStyle()
+                    }
+                }
+            }
+            
+            Text("Make sure this layer is active with the visual slider all the way up to see the test message.")
+                .font(.system(size: 14))
+                .foregroundColor(Theme.textSecondary)
+                .multilineTextAlignment(.center)
+                .padding(.horizontal, 40)
+                .padding(.top, 15)
+        }
+        .padding(.vertical, 10)
+    }
+    
+    /// Formatting page content
+    private var formattingPageContent: some View {
+        VStack(alignment: .leading, spacing: 15) {
+            // Text formatting section
+            VStack(alignment: .leading, spacing: 15) {
+                Text("TEXT FORMATTING")
+                    .font(.system(size: 16, weight: .bold))
+                    .foregroundColor(Theme.accentPurple)
+                    .padding(.top, 10)
+                
+                // Line break mode
+                VStack(alignment: .leading, spacing: 8) {
+                    Text("Line Break Mode")
+                        .font(.headline)
+                        .foregroundColor(.white)
+                    
+                    Picker("Line Break Mode", selection: $lineBreakMode) {
+                        ForEach(LineBreakMode.allCases) { mode in
+                            Text(mode.displayName).tag(mode)
+                        }
+                    }
+                    .pickerStyle(SegmentedPickerStyle())
+                    .padding(5)
+                    .background(Color.purple.opacity(0.2))
+                    .cornerRadius(5)
+                    
+                    Text("Choose how text is split into multiple lines")
+                        .font(.caption)
+                        .foregroundColor(.gray)
+                }
+                
+                // Character limit
+                if lineBreakMode == .characterLimit {
+                    VStack(alignment: .leading, spacing: 8) {
+                        Text("Maximum Characters Per Line: \(maxCharsPerLine)")
+                            .font(.headline)
+                            .foregroundColor(.white)
+                        
+                        HStack {
+                            Slider(value: Binding(
+                                get: { Double(maxCharsPerLine) },
+                                set: { maxCharsPerLine = Int($0) }
+                            ), in: 10...30, step: 1)
+                            
+                            Stepper("", value: $maxCharsPerLine, in: 10...30)
+                                .labelsHidden()
+                        }
+                        
+                        Text("Default is 16 characters, which fits phrases like 'LEDMESSENGER.COM'")
+                            .font(.caption)
+                            .foregroundColor(.gray)
+                    }
+                }
+                
+                // Words per line
+                if lineBreakMode == .wordCount {
+                    VStack(alignment: .leading, spacing: 8) {
+                        Text("Words Per Line: \(wordsPerLine)")
+                            .font(.headline)
+                            .foregroundColor(.white)
+                        
+                        HStack {
+                            Slider(value: Binding(
+                                get: { Double(wordsPerLine) },
+                                set: { wordsPerLine = Int($0) }
+                            ), in: 1...6, step: 1)
+                            
+                            Stepper("", value: $wordsPerLine, in: 1...6)
+                                .labelsHidden()
+                        }
+                        
+                        Text("Default is 2 words per line. More words per line means fewer lines overall.")
+                            .font(.caption)
+                            .foregroundColor(.gray)
+                    }
+                }
+                
+                Divider()
+                    .background(Color.gray.opacity(0.3))
+                    .padding(.vertical, 10)
+                
+                // Text transformation
+                VStack(alignment: .leading, spacing: 8) {
+                    Text("Text Transformation")
+                        .font(.headline)
+                        .foregroundColor(.white)
+                    
+                    Text("All text is automatically converted to UPPERCASE to maximize visibility on LED walls")
+                        .font(.caption)
+                        .foregroundColor(.gray)
+                }
+                
+                // Preview section
+                VStack(alignment: .leading, spacing: 15) {
+                    Text("PREVIEW")
+                        .font(.system(size: 16, weight: .bold))
+                        .foregroundColor(Theme.accentPurple)
+                        .padding(.top, 15)
+                    
+                    // Formatted text preview
+                    let previewText = "SAMPLE LED MESSENGER TEXT FOR PREVIEW"
+                    let formattedText = formatTextForPreview(previewText)
+                    
+                    Text(formattedText)
+                        .font(.system(size: 18, weight: .bold))
+                        .foregroundColor(.white)
+                        .lineSpacing(8)
+                        .padding()
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .background(Theme.cardBgDark)
+                        .cornerRadius(10)
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 10)
+                                .stroke(Color.purple, lineWidth: 1)
+                        )
+                }
+            }
+            .padding(.horizontal, 20)
+            .padding(.bottom, 10)
+        }
+        .frame(maxWidth: .infinity)
+    }
+    
+    /// Format text for preview
+    private func formatTextForPreview(_ text: String) -> String {
+        let dummyMessage = Message(text: text)
+        return dummyMessage.formatWithLineBreaks(
+            mode: lineBreakMode,
+            maxCharsPerLine: maxCharsPerLine,
+            wordsPerLine: wordsPerLine
+        )
+    }
+    
+    /// Save the settings
+    private func saveSettings() {
+        // Parse values
+        let parsedPort = Int(port) ?? 2269
+        let parsedLayer = Int(layer) ?? 5
+        let parsedStartingClip = Int(startingClip) ?? 1
+        let parsedClearClip = Int(clearClip) ?? (parsedStartingClip + 3)
+        
+        // Update OSC settings
+        viewModel.updateOSCSettings(
+            ipAddress: ipAddress,
+            port: parsedPort,
+            layer: parsedLayer,
+            startingClip: parsedStartingClip,
+            clearClip: parsedClearClip
+        )
+        
+        // Update formatting settings
+        viewModel.settingsManager.updateFormattingSettings(
+            lineBreakMode: lineBreakMode,
+            maxCharsPerLine: maxCharsPerLine,
+            wordsPerLine: wordsPerLine
+        )
+    }
+                        .textFieldStyle(PlainTextFieldStyle())
+                        #endif
+                        .onChange(of: port) { newValue in
+                            // Keep only digits
+                            port = newValue.filter { $0.isNumber }
+                        }
+                }
+                .padding(.top, 8)
+            }
+            
+            // Helpful instructions block
+            VStack(spacing: 12) {
+                Text("LED MESSENGER works by sending text to sequential text clips in Resolume on a single layer followed by a blank clip to clear the message.")
+                    .font(.system(size: 13))
+                    .foregroundColor(Theme.textSecondary)
+                    .multilineTextAlignment(.center)
+                    .padding(.horizontal, 40)
+                
+                let clipStart = Int(startingClip) ?? 1
+                Text("EXAMPLE: Layer \(layer) Slot \(startingClip) would use clips \(clipStart), \(clipStart+1), \(clipStart+2) with clip \(clipStart+3) automatically used to clear the message.")
+                    .font(.system(size: 13))
+                    .foregroundColor(Theme.textSecondary)
+                    .multilineTextAlignment(.center)
+                    .padding(.horizontal, 40)
+            }
+            .padding(.vertical, 10)
+            
+            // Purple outline boxes with "T" inside
+            HStack(spacing: 12) {
+                // Three boxes with "T"
+                ForEach(1...3, id: \.self) { _ in
+                    Text("T")
+                        .font(.system(size: 16, weight: .bold))
+                        .foregroundColor(.white)
+                        .frame(width: 38, height: 38)
+                        .background(Color.black.opacity(0.3))
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 4)
+                                .stroke(Theme.accentPurple, lineWidth: 1.5)
+                                .shadow(color: Theme.accentPurple.opacity(0.5), radius: 3)
+                        )
+                        .cornerRadius(4)
+                }
+                
+                // Empty box
+                Text("")
+                    .font(.system(size: 16, weight: .bold))
+                    .foregroundColor(.white)
+                    .frame(width: 38, height: 38)
+                    .background(Color.black.opacity(0.3))
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 4)
+                            .stroke(Theme.accentPurple, lineWidth: 1.5)
+                            .shadow(color: Theme.accentPurple.opacity(0.5), radius: 3)
+                    )
+                    .cornerRadius(4)
+            }
+            .padding(.vertical, 15)
+            
+            // Layer & Slot Selectors
+            HStack(spacing: 25) {
+                // Layer
+                VStack(spacing: 10) {
+                    Text("LAYER")
+                        .font(.system(size: 14, weight: .bold))
+                        .foregroundColor(.white)
+                    
+                    HStack {
+                        Button(action: {
+                            let layerNum = max(1, (Int(layer) ?? 5) - 1)
+                            layer = "\(layerNum)"
+                        }) {
+                            Image(systemName: "minus.circle.fill")
+                                .font(.system(size: 24))
+                                .foregroundColor(Theme.accentPurple)
+                        }
+                        .consistentMacOSStyle()
+                        
+                        Text(layer)
+                            .font(.system(size: 28, weight: .bold))
+                            .foregroundColor(.white)
+                            .frame(width: 50)
+                            .padding(6)
+                            .background(Color.black.opacity(0.3))
+                            .overlay(
+                                RoundedRectangle(cornerRadius: 8)
+                                    .stroke(Theme.accentPurple, lineWidth: 1.5)
+                                    .shadow(color: Theme.accentPurple.opacity(0.5), radius: 3)
+                            )
+                            .cornerRadius(8)
+                        
+                        Button(action: {
+                            let layerNum = min(20, (Int(layer) ?? 5) + 1)
+                            layer = "\(layerNum)"
+                        }) {
+                            Image(systemName: "plus.circle.fill")
+                                .font(.system(size: 24))
+                                .foregroundColor(Theme.accentPurple)
+                        }
+                        .consistentMacOSStyle()
+                    }
+                }
+                
+                // Starting Slot
+                VStack(spacing: 10) {
+                    Text("START SLOT")
+                        .font(.system(size: 14, weight: .bold))
+                        .foregroundColor(.white)
+                    
+                    HStack {
+                        Button(action: {
+                            let slotNum = max(1, (Int(startingClip) ?? 3) - 1)
+                            startingClip = "\(slotNum)"
+                            // Always set clear clip to startingClip + 3
+                            clearClip = "\(slotNum + 3)"
+                        }) {
+                            Image(systemName: "minus.circle.fill")
+                                .font(.system(size: 24))
+                                .foregroundColor(Theme.accentPurple)
+                        }
+                        .consistentMacOSStyle()
+                        
+                        Text(startingClip)
+                            .font(.system(size: 28, weight: .bold))
+                            .foregroundColor(.white)
+                            .frame(width: 50)
+                            .padding(6)
+                            .background(Color.black.opacity(0.3))
+                            .overlay(
+                                RoundedRectangle(cornerRadius: 8)
+                                    .stroke(Theme.accentPurple, lineWidth: 1.5)
+                                    .shadow(color: Theme.accentPurple.opacity(0.5), radius: 3)
+                            )
+                            .cornerRadius(8)
+                        
+                        Button(action: {
+                            let slotNum = min(50, (Int(startingClip) ?? 3) + 1)
+                            startingClip = "\(slotNum)"
+                            // Always set clear clip to startingClip + 3
+                            clearClip = "\(slotNum + 3)"
+                        }) {
+                            Image(systemName: "plus.circle.fill")
+                                .font(.system(size: 24))
+                                .foregroundColor(Theme.accentPurple)
+                        }
+                        .consistentMacOSStyle()
+                    }
+                }
+                
+            }
+            
+            Text("Make sure this layer is active with the visual slider all the way up to see the test message.")
+                .font(.system(size: 12))
+                .foregroundColor(Theme.textSecondary)
+                .multilineTextAlignment(.center)
+                .padding(.horizontal, 40)
+                
+            Spacer()
+            
+            // Status and Launch button
+            VStack(spacing: 15) {
+                // Show status when connecting
+                if isConnecting {
+                    Text(viewModel.setupStatusMessage)
+                        .font(.system(size: 16))
+                        .foregroundColor(Theme.accentPurple)
+                        .multilineTextAlignment(.center)
+                        .padding()
+                }
+                
+                // Launch button
+                Button {
+                    // Save settings
+                    saveSettings()
+                    
+                    // Start connection process
+                    isConnecting = true
+                    viewModel.completeSetup()
+                } label: {
+                    Text(isConnecting ? "CONNECTING..." : "LET'S GO!")
+                        .font(.system(size: 20, weight: .bold))
+                        .foregroundColor(.white)
+                        .frame(maxWidth: .infinity)
+                        .padding(.vertical, 16)
+                        .background(Theme.primaryGradient)
+                        .cornerRadius(25)
+                }
+                .consistentMacOSStyle()
+                .disabled(isConnecting)
+                .opacity(isConnecting ? 0.7 : 1.0)
+            }
+            .padding([.horizontal, .bottom], 40)
+        }
+        .background(Theme.backgroundGradient.edgesIgnoringSafeArea(.all))
+    }
+    
+    /// Save the settings
+    private func saveSettings() {
+        // Parse values
+        let parsedPort = Int(port) ?? 2269
+        let parsedLayer = Int(layer) ?? 5
+        let parsedStartingClip = Int(startingClip) ?? 1
+        let parsedClearClip = Int(clearClip) ?? 6
+        
+        // Update settings
+        viewModel.updateOSCSettings(
+            ipAddress: ipAddress,
+            port: parsedPort,
+            layer: parsedLayer,
+            startingClip: parsedStartingClip,
+            clearClip: parsedClearClip
+        )
+    }
+}

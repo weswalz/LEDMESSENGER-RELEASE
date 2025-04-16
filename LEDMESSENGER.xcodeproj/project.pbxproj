@@ -1,0 +1,1114 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		0018F3550D1A9A0AB99AF9D2 /* OSCBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F9CDD1AB34F74A7B3B9DB1D /* OSCBundle.swift */; };
+		01A90806D58E270ED8F12FAB /* MessageQueueView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC9F2B0FC4E2053A911FDCF7 /* MessageQueueView.swift */; };
+		02A5F115A8E84BBA1CDB50C2 /* PeerStatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3351BA9CDE3F3D7775187B8 /* PeerStatusView.swift */; };
+		074089C031EF93D6A15AB633 /* AppSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB5484F38006D277BC6E0CEC /* AppSettings.swift */; };
+		08A659BA923CFA43F944530F /* CustomizationSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F45474CE9E37164D3005C59 /* CustomizationSection.swift */; };
+		1297E4E2C7A14A9E1FD1EEDC /* OSCSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ED460A03524F2D7B230B50B /* OSCSettings.swift */; };
+		12BD99D75D5D7F16B7DB7017 /* PeerStatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3351BA9CDE3F3D7775187B8 /* PeerStatusView.swift */; };
+		13BE159093B3F5863B23C8E5 /* AppearanceSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = A089B352F1813037B678E02A /* AppearanceSettings.swift */; };
+		18FDC31CF900CCAF289DA0D3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D9CD6C699F139CA97AEC6F10 /* Assets.xcassets */; };
+		2574B9AD57D4ECF0599075ED /* AppViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C8D9433555F3B4EA4285CF1 /* AppViewModel.swift */; };
+		2DE4430ECB4CFA551C1BDDAD /* MessageQueueView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC9F2B0FC4E2053A911FDCF7 /* MessageQueueView.swift */; };
+		306C1A402255CE628CE6BDAF /* MessageStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0A5F4A2F6713C19949D66BA /* MessageStatus.swift */; };
+		3D4DB462A0C846CF973E27C4 /* AppViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C8D9433555F3B4EA4285CF1 /* AppViewModel.swift */; };
+		3DC45808B07521B726FC59CB /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52781CF55FFD8103A7601020 /* Message.swift */; };
+		40FED67DFE9A060C9F767E72 /* CustomizationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3F6477A3452DB34B8D0321F /* CustomizationView.swift */; };
+		4961EB46F1B00CC6277D7293 /* MessageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D62C022FD077F64F4BF1191C /* MessageViewModel.swift */; };
+		4A27051FC97F9F5493A47F7E /* OSCServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27C22D34E9FC8AA363B0C9F8 /* OSCServiceProtocol.swift */; };
+		4B8F47B7D3FAC801A137A4A8 /* SettingsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D32690B4B8AB1A88FEBE0E71 /* SettingsManager.swift */; };
+		4C76C948FCD76BD18E9A876B /* MessageTemplate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A02A7EAFA1BFB5E63EAB8D1 /* MessageTemplate.swift */; };
+		5AC89571BE012C79E38B91F3 /* MessageStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0A5F4A2F6713C19949D66BA /* MessageStatus.swift */; };
+		5BD396509A3E10C6381D2F02 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31A2A0A675E8282163FC9563 /* Theme.swift */; };
+		5CC2CF7EE311F6B07D9C98E7 /* ResolumeOSCService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AABFF7D301061EE3197AFA2D /* ResolumeOSCService.swift */; };
+		609B84D484B914B58208BD25 /* OSCTypeTag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80FE0EF7A7286B4F854187CB /* OSCTypeTag.swift */; };
+		63AE6501248CED19C0096810 /* OSCError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70ED11BF60EF1FA55F983A85 /* OSCError.swift */; };
+		68646642D30C540D486C41A5 /* Notification+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66ED88CB7E6EEC4B441C56D6 /* Notification+Extensions.swift */; };
+		6A4FC576C388D612B347D261 /* OSCAddress.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2B3BE2FBE84BCB640AE6063 /* OSCAddress.swift */; };
+		6B63DB73B5171464EEB34560 /* OSCAddress.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2B3BE2FBE84BCB640AE6063 /* OSCAddress.swift */; };
+		6C78723D8D79C49C94FCABD1 /* MessageCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC45AEA83629C01D49DC8843 /* MessageCardView.swift */; };
+		70536EC9922D207D1DE2CA4C /* Notification+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66ED88CB7E6EEC4B441C56D6 /* Notification+Extensions.swift */; };
+		771ADD4C2A01D4011F3F9E78 /* OSCService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ACA080C7CD6294969CFF7C7 /* OSCService.swift */; };
+		7C1A01BEA72DA8DBE23E1106 /* LineBreakMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = A163664FD6D3F4C46617F8B8 /* LineBreakMode.swift */; };
+		7C3C7B1D780AD7547AA38D55 /* CustomizationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3F6477A3452DB34B8D0321F /* CustomizationView.swift */; };
+		7FED445AD79F733E2051AB7D /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3B4FD59D17DA2B0282A8714 /* ContentView.swift */; };
+		820F42D75D9846DEC1B6D208 /* NewMessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB3EE6BA676BA5AD52C059E /* NewMessageView.swift */; };
+		86A933A6E54590AC6139469A /* OSCService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ACA080C7CD6294969CFF7C7 /* OSCService.swift */; };
+		8A35CA90FE428D692F8FDA6B /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52781CF55FFD8103A7601020 /* Message.swift */; };
+		8CFF5830C41862E27E5C85F4 /* FormattingSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AEB5A6FD6DB76D5BC7959D6 /* FormattingSettings.swift */; };
+		8ED09607165E4C4091861198 /* OSCServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27C22D34E9FC8AA363B0C9F8 /* OSCServiceProtocol.swift */; };
+		8FD5813065E91E27A09F6DEE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D9CD6C699F139CA97AEC6F10 /* Assets.xcassets */; };
+		90C806C4500F69E9EBD9C1A6 /* CustomizationSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F45474CE9E37164D3005C59 /* CustomizationSection.swift */; };
+		96A072CF9BA47C1E96E73CC7 /* AppearanceSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = A089B352F1813037B678E02A /* AppearanceSettings.swift */; };
+		A16EA8B992FC990102A2364C /* OSCModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BA0B19D1D7EC87A995D68AD /* OSCModels.swift */; };
+		A89AA059DBBE09B29F6D52FC /* MessageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D62C022FD077F64F4BF1191C /* MessageViewModel.swift */; };
+		B054BE8914A90663742CE839 /* MessageCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC45AEA83629C01D49DC8843 /* MessageCardView.swift */; };
+		B692323D6D20EF71F2E7EA98 /* NewMessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB3EE6BA676BA5AD52C059E /* NewMessageView.swift */; };
+		B91A53DF370B4DF0BBAB036E /* OSCError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70ED11BF60EF1FA55F983A85 /* OSCError.swift */; };
+		B9DDFC0C7B124C4D70902B56 /* LEDMessageApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D15C1F40DEDAE956959ADF0 /* LEDMessageApp.swift */; };
+		BCFE3B674DF0920FF9D8CCF4 /* AppSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB5484F38006D277BC6E0CEC /* AppSettings.swift */; };
+		C77CBBA254BDDBB82140FB9C /* ConnectionState.swift in Sources */ = {isa = PBXBuildFile; fileRef = C90CD2889AB404320D55A6F2 /* ConnectionState.swift */; };
+		C7E4B8133110F6E906B951D8 /* MessageModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9553C0E86FC0581242C5164 /* MessageModels.swift */; };
+		C89AF6095944C23EF7F482D2 /* OSCMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0593A22AB7FA99F019BBE1B /* OSCMessage.swift */; };
+		CAD8B9075B4A8DEEBCF35DB1 /* SettingsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D32690B4B8AB1A88FEBE0E71 /* SettingsManager.swift */; };
+		CB3328293F9A3A5F34F18D29 /* OSCArgument.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9748FE9A48436FFC231A1C2 /* OSCArgument.swift */; };
+		CCAC0514FC4048DAD1903976 /* FormattingSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AEB5A6FD6DB76D5BC7959D6 /* FormattingSettings.swift */; };
+		CCF2535B13676BEFB43ECDB8 /* OSCSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ED460A03524F2D7B230B50B /* OSCSettings.swift */; };
+		CD998947E6216CF9ED4BDE78 /* MessageTemplate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A02A7EAFA1BFB5E63EAB8D1 /* MessageTemplate.swift */; };
+		CFC1C062FDAD2E79F3CE3FC1 /* ConnectionState.swift in Sources */ = {isa = PBXBuildFile; fileRef = C90CD2889AB404320D55A6F2 /* ConnectionState.swift */; };
+		D4B63A5E0C07214EBECFFBF8 /* SetupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4376595EA41E41891406AD2 /* SetupView.swift */; };
+		D55E45090A7F8345F75C80DA /* OSCModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BA0B19D1D7EC87A995D68AD /* OSCModels.swift */; };
+		D875D2F76633C0CFB69BE78D /* LabelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D65CD76FDB6B0F777528976 /* LabelType.swift */; };
+		DA287810A6810DF8C6C07E32 /* PeerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2327A2CBD72C3D2348514F71 /* PeerService.swift */; };
+		DE1C57333BF0A742FE0B6C11 /* MessageModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9553C0E86FC0581242C5164 /* MessageModels.swift */; };
+		DE6BA4D22C4DA9AEC374052F /* ResolumeOSCService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AABFF7D301061EE3197AFA2D /* ResolumeOSCService.swift */; };
+		DFF8CEA45E1D05B3C632FC97 /* OSCTypeTag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80FE0EF7A7286B4F854187CB /* OSCTypeTag.swift */; };
+		E18AC9F3C04F8EC1B9CCB9B6 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3B4FD59D17DA2B0282A8714 /* ContentView.swift */; };
+		E62BBEA20DB2BC6043A00077 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31A2A0A675E8282163FC9563 /* Theme.swift */; };
+		E7884921669460784792A96C /* OSCArgument.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9748FE9A48436FFC231A1C2 /* OSCArgument.swift */; };
+		F12073F61DC87D77C158EFAC /* OSCMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0593A22AB7FA99F019BBE1B /* OSCMessage.swift */; };
+		F1D9364E7CF7115B40E98B5C /* PeerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2327A2CBD72C3D2348514F71 /* PeerService.swift */; };
+		F71CE076BA516CAC93A1BC70 /* LEDMessageApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D15C1F40DEDAE956959ADF0 /* LEDMessageApp.swift */; };
+		F7C6F97F5838CAE3AE1360E7 /* LineBreakMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = A163664FD6D3F4C46617F8B8 /* LineBreakMode.swift */; };
+		FB8B134EFE520BEA07FB8265 /* OSCBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F9CDD1AB34F74A7B3B9DB1D /* OSCBundle.swift */; };
+		FBF847800C15BF2007E91E7F /* SetupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4376595EA41E41891406AD2 /* SetupView.swift */; };
+		FC8E4F5A74EC40B7DCE0310E /* LabelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D65CD76FDB6B0F777528976 /* LabelType.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		05D6EE46839201F5C9AAE9C3 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DE625092930269069764757F /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 19BBBAE6E74899C62F69FC23;
+			remoteInfo = LEDMESSENGER_macOS;
+		};
+		3419838F3ECCB1C908FACA46 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DE625092930269069764757F /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 6C94F9B5280FA8631B99D0CC;
+			remoteInfo = LEDMESSENGER_iPad;
+		};
+		A0974825B59E170FFD4E7139 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DE625092930269069764757F /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 19BBBAE6E74899C62F69FC23;
+			remoteInfo = LEDMESSENGER_macOS;
+		};
+		C1B5C0E848F61E436BE3430D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DE625092930269069764757F /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 6C94F9B5280FA8631B99D0CC;
+			remoteInfo = LEDMESSENGER_iPad;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		0ACA080C7CD6294969CFF7C7 /* OSCService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OSCService.swift; sourceTree = "<group>"; };
+		0F45474CE9E37164D3005C59 /* CustomizationSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomizationSection.swift; sourceTree = "<group>"; };
+		1AEB5A6FD6DB76D5BC7959D6 /* FormattingSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormattingSettings.swift; sourceTree = "<group>"; };
+		1BA0B19D1D7EC87A995D68AD /* OSCModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OSCModels.swift; sourceTree = "<group>"; };
+		1D65CD76FDB6B0F777528976 /* LabelType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelType.swift; sourceTree = "<group>"; };
+		1ED460A03524F2D7B230B50B /* OSCSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OSCSettings.swift; sourceTree = "<group>"; };
+		2327A2CBD72C3D2348514F71 /* PeerService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeerService.swift; sourceTree = "<group>"; };
+		27C22D34E9FC8AA363B0C9F8 /* OSCServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OSCServiceProtocol.swift; sourceTree = "<group>"; };
+		2A02A7EAFA1BFB5E63EAB8D1 /* MessageTemplate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageTemplate.swift; sourceTree = "<group>"; };
+		31A2A0A675E8282163FC9563 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
+		426864C1C85A6209D30ACE11 /* LEDMESSENGER_iPad.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LEDMESSENGER_iPad.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		52781CF55FFD8103A7601020 /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
+		5337F725A4DCA68B08B6A5FD /* LEDMESSENGERUITests_macOS.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LEDMESSENGERUITests_macOS.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		54990BA1C1FDD2B4DA803AA7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		66ED88CB7E6EEC4B441C56D6 /* Notification+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Notification+Extensions.swift"; sourceTree = "<group>"; };
+		67CBE1F53CCEA44475C7319B /* LEDMESSENGER_macOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LEDMESSENGER_macOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		70ED11BF60EF1FA55F983A85 /* OSCError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OSCError.swift; sourceTree = "<group>"; };
+		80FE0EF7A7286B4F854187CB /* OSCTypeTag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OSCTypeTag.swift; sourceTree = "<group>"; };
+		8BB3EE6BA676BA5AD52C059E /* NewMessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewMessageView.swift; sourceTree = "<group>"; };
+		8C8D9433555F3B4EA4285CF1 /* AppViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppViewModel.swift; sourceTree = "<group>"; };
+		9D15C1F40DEDAE956959ADF0 /* LEDMessageApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LEDMessageApp.swift; sourceTree = "<group>"; };
+		9F9CDD1AB34F74A7B3B9DB1D /* OSCBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OSCBundle.swift; sourceTree = "<group>"; };
+		A089B352F1813037B678E02A /* AppearanceSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppearanceSettings.swift; sourceTree = "<group>"; };
+		A163664FD6D3F4C46617F8B8 /* LineBreakMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineBreakMode.swift; sourceTree = "<group>"; };
+		AABFF7D301061EE3197AFA2D /* ResolumeOSCService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResolumeOSCService.swift; sourceTree = "<group>"; };
+		AFF1FEB24D9992A484745641 /* LEDMESSENGERUITests_iPad.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LEDMESSENGERUITests_iPad.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		B2B3BE2FBE84BCB640AE6063 /* OSCAddress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OSCAddress.swift; sourceTree = "<group>"; };
+		B3F6477A3452DB34B8D0321F /* CustomizationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomizationView.swift; sourceTree = "<group>"; };
+		B4376595EA41E41891406AD2 /* SetupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupView.swift; sourceTree = "<group>"; };
+		B9553C0E86FC0581242C5164 /* MessageModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageModels.swift; sourceTree = "<group>"; };
+		B9748FE9A48436FFC231A1C2 /* OSCArgument.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OSCArgument.swift; sourceTree = "<group>"; };
+		C0593A22AB7FA99F019BBE1B /* OSCMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OSCMessage.swift; sourceTree = "<group>"; };
+		C3351BA9CDE3F3D7775187B8 /* PeerStatusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeerStatusView.swift; sourceTree = "<group>"; };
+		C90CD2889AB404320D55A6F2 /* ConnectionState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionState.swift; sourceTree = "<group>"; };
+		CB5484F38006D277BC6E0CEC /* AppSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSettings.swift; sourceTree = "<group>"; };
+		CC45AEA83629C01D49DC8843 /* MessageCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageCardView.swift; sourceTree = "<group>"; };
+		D32690B4B8AB1A88FEBE0E71 /* SettingsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsManager.swift; sourceTree = "<group>"; };
+		D62C022FD077F64F4BF1191C /* MessageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageViewModel.swift; sourceTree = "<group>"; };
+		D9CD6C699F139CA97AEC6F10 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		E5EA04ED9D13B820CB9E45D9 /* LEDMESSENGERTests_iPad.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LEDMESSENGERTests_iPad.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		E9E7CD47CD4D44DF0ACE768A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		ED26D0C66BA721F0758D7805 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		EDE4D43ECDEC4877E9835452 /* LEDMESSENGERTests_macOS.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LEDMESSENGERTests_macOS.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		F0A5F4A2F6713C19949D66BA /* MessageStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageStatus.swift; sourceTree = "<group>"; };
+		F3B4FD59D17DA2B0282A8714 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		FAFBB5028EC8B60AE9B49974 /* LEDMESSENGER.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = LEDMESSENGER.entitlements; sourceTree = "<group>"; };
+		FC9F2B0FC4E2053A911FDCF7 /* MessageQueueView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageQueueView.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXGroup section */
+		0631E5F94BC9CE35E55C7CFB /* Messages */ = {
+			isa = PBXGroup;
+			children = (
+				CC45AEA83629C01D49DC8843 /* MessageCardView.swift */,
+				FC9F2B0FC4E2053A911FDCF7 /* MessageQueueView.swift */,
+				8BB3EE6BA676BA5AD52C059E /* NewMessageView.swift */,
+			);
+			path = Messages;
+			sourceTree = "<group>";
+		};
+		1B9BAB92D211B14D2EA4E88C /* LEDMESSENGERTests */ = {
+			isa = PBXGroup;
+			children = (
+				54990BA1C1FDD2B4DA803AA7 /* Info.plist */,
+			);
+			path = LEDMESSENGERTests;
+			sourceTree = "<group>";
+		};
+		1BF564FF0B88F54B7D222A50 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				66ED88CB7E6EEC4B441C56D6 /* Notification+Extensions.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		2340C345D5A536FD5250684A /* App */ = {
+			isa = PBXGroup;
+			children = (
+				9D15C1F40DEDAE956959ADF0 /* LEDMessageApp.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		2E36C92CBA186236E1DC7714 = {
+			isa = PBXGroup;
+			children = (
+				2340C345D5A536FD5250684A /* App */,
+				1BF564FF0B88F54B7D222A50 /* Extensions */,
+				B715D92E8F086B300169176C /* LEDMESSENGER */,
+				1B9BAB92D211B14D2EA4E88C /* LEDMESSENGERTests */,
+				7833B525F61E9E43E54D495C /* LEDMESSENGERUITests */,
+				EC0EA87F6A599C4D68069F6C /* Models */,
+				F9BF2302D04654852742A9DA /* Services */,
+				B6E78076D76B4DB183C292EA /* Shared */,
+				E6A35B117802916B780D9280 /* Utilities */,
+				606E17D55E0A8AE90606825D /* ViewModels */,
+				CBAA9834178B14A279AB4A5C /* Views */,
+				CD0080686B9A36AA353B1C38 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		606E17D55E0A8AE90606825D /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				8C8D9433555F3B4EA4285CF1 /* AppViewModel.swift */,
+				D62C022FD077F64F4BF1191C /* MessageViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		7833B525F61E9E43E54D495C /* LEDMESSENGERUITests */ = {
+			isa = PBXGroup;
+			children = (
+				ED26D0C66BA721F0758D7805 /* Info.plist */,
+			);
+			path = LEDMESSENGERUITests;
+			sourceTree = "<group>";
+		};
+		7F039E490DCDB73E5635F25C /* Setup */ = {
+			isa = PBXGroup;
+			children = (
+				B4376595EA41E41891406AD2 /* SetupView.swift */,
+			);
+			path = Setup;
+			sourceTree = "<group>";
+		};
+		A4F98B4FCBE13C411A3D62BD /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				C3351BA9CDE3F3D7775187B8 /* PeerStatusView.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		B6E78076D76B4DB183C292EA /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+				31A2A0A675E8282163FC9563 /* Theme.swift */,
+			);
+			path = Shared;
+			sourceTree = "<group>";
+		};
+		B715D92E8F086B300169176C /* LEDMESSENGER */ = {
+			isa = PBXGroup;
+			children = (
+				D9CD6C699F139CA97AEC6F10 /* Assets.xcassets */,
+				E9E7CD47CD4D44DF0ACE768A /* Info.plist */,
+				FAFBB5028EC8B60AE9B49974 /* LEDMESSENGER.entitlements */,
+			);
+			path = LEDMESSENGER;
+			sourceTree = "<group>";
+		};
+		BE5F2FD1A425B0033B02B10F /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				A089B352F1813037B678E02A /* AppearanceSettings.swift */,
+				CB5484F38006D277BC6E0CEC /* AppSettings.swift */,
+				1AEB5A6FD6DB76D5BC7959D6 /* FormattingSettings.swift */,
+				1ED460A03524F2D7B230B50B /* OSCSettings.swift */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
+		C18DBCB844A21D1076E3DDEC /* OSC */ = {
+			isa = PBXGroup;
+			children = (
+				B2B3BE2FBE84BCB640AE6063 /* OSCAddress.swift */,
+				B9748FE9A48436FFC231A1C2 /* OSCArgument.swift */,
+				9F9CDD1AB34F74A7B3B9DB1D /* OSCBundle.swift */,
+				C0593A22AB7FA99F019BBE1B /* OSCMessage.swift */,
+				1BA0B19D1D7EC87A995D68AD /* OSCModels.swift */,
+				80FE0EF7A7286B4F854187CB /* OSCTypeTag.swift */,
+			);
+			path = OSC;
+			sourceTree = "<group>";
+		};
+		CBAA9834178B14A279AB4A5C /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				A4F98B4FCBE13C411A3D62BD /* Components */,
+				CD82E3C4387968A26BFCA007 /* Customization */,
+				0631E5F94BC9CE35E55C7CFB /* Messages */,
+				7F039E490DCDB73E5635F25C /* Setup */,
+				F3B4FD59D17DA2B0282A8714 /* ContentView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		CD0080686B9A36AA353B1C38 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				426864C1C85A6209D30ACE11 /* LEDMESSENGER_iPad.app */,
+				67CBE1F53CCEA44475C7319B /* LEDMESSENGER_macOS.app */,
+				E5EA04ED9D13B820CB9E45D9 /* LEDMESSENGERTests_iPad.xctest */,
+				EDE4D43ECDEC4877E9835452 /* LEDMESSENGERTests_macOS.xctest */,
+				AFF1FEB24D9992A484745641 /* LEDMESSENGERUITests_iPad.xctest */,
+				5337F725A4DCA68B08B6A5FD /* LEDMESSENGERUITests_macOS.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		CD82E3C4387968A26BFCA007 /* Customization */ = {
+			isa = PBXGroup;
+			children = (
+				B3F6477A3452DB34B8D0321F /* CustomizationView.swift */,
+			);
+			path = Customization;
+			sourceTree = "<group>";
+		};
+		E6A35B117802916B780D9280 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				BE5F2FD1A425B0033B02B10F /* Settings */,
+				D32690B4B8AB1A88FEBE0E71 /* SettingsManager.swift */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
+		EC0EA87F6A599C4D68069F6C /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				C18DBCB844A21D1076E3DDEC /* OSC */,
+				0F45474CE9E37164D3005C59 /* CustomizationSection.swift */,
+				1D65CD76FDB6B0F777528976 /* LabelType.swift */,
+				A163664FD6D3F4C46617F8B8 /* LineBreakMode.swift */,
+				52781CF55FFD8103A7601020 /* Message.swift */,
+				B9553C0E86FC0581242C5164 /* MessageModels.swift */,
+				F0A5F4A2F6713C19949D66BA /* MessageStatus.swift */,
+				2A02A7EAFA1BFB5E63EAB8D1 /* MessageTemplate.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		F9BF2302D04654852742A9DA /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				FAB12171BB3C8B1BAE755C9C /* OSC */,
+				2327A2CBD72C3D2348514F71 /* PeerService.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		FAB12171BB3C8B1BAE755C9C /* OSC */ = {
+			isa = PBXGroup;
+			children = (
+				C90CD2889AB404320D55A6F2 /* ConnectionState.swift */,
+				70ED11BF60EF1FA55F983A85 /* OSCError.swift */,
+				0ACA080C7CD6294969CFF7C7 /* OSCService.swift */,
+				27C22D34E9FC8AA363B0C9F8 /* OSCServiceProtocol.swift */,
+				AABFF7D301061EE3197AFA2D /* ResolumeOSCService.swift */,
+			);
+			path = OSC;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		19BBBAE6E74899C62F69FC23 /* LEDMESSENGER_macOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A191B4EB2EB694F7EEFF9176 /* Build configuration list for PBXNativeTarget "LEDMESSENGER_macOS" */;
+			buildPhases = (
+				A96C5E66DBEDCEF0EA7F07CE /* Sources */,
+				F3E816E1FA04B729C8CE173B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = LEDMESSENGER_macOS;
+			productName = LEDMESSENGER_macOS;
+			productReference = 67CBE1F53CCEA44475C7319B /* LEDMESSENGER_macOS.app */;
+			productType = "com.apple.product-type.application";
+		};
+		4FAF5621871F3C3E6E95B865 /* LEDMESSENGERTests_macOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E994736BB4DB7A741D7787E0 /* Build configuration list for PBXNativeTarget "LEDMESSENGERTests_macOS" */;
+			buildPhases = (
+				CFF6C907DB65E17C9E817D26 /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				695B490BF75AE446BF3AAA78 /* PBXTargetDependency */,
+			);
+			name = LEDMESSENGERTests_macOS;
+			productName = LEDMESSENGERTests_macOS;
+			productReference = EDE4D43ECDEC4877E9835452 /* LEDMESSENGERTests_macOS.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		559A8477428F0F41D421E85B /* LEDMESSENGERUITests_macOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6E5CE7582079EB3DB54C6A61 /* Build configuration list for PBXNativeTarget "LEDMESSENGERUITests_macOS" */;
+			buildPhases = (
+				26EA10D2BDAE1E6C019FE6A0 /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				6CDA66D634DE6861277B1CF3 /* PBXTargetDependency */,
+			);
+			name = LEDMESSENGERUITests_macOS;
+			productName = LEDMESSENGERUITests_macOS;
+			productReference = 5337F725A4DCA68B08B6A5FD /* LEDMESSENGERUITests_macOS.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+		6C94F9B5280FA8631B99D0CC /* LEDMESSENGER_iPad */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F9121BC37935C6783E9F66D8 /* Build configuration list for PBXNativeTarget "LEDMESSENGER_iPad" */;
+			buildPhases = (
+				CA28DDA7275BEE7151D49400 /* Sources */,
+				2238C4353E9AF1736309855E /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = LEDMESSENGER_iPad;
+			productName = LEDMESSENGER_iPad;
+			productReference = 426864C1C85A6209D30ACE11 /* LEDMESSENGER_iPad.app */;
+			productType = "com.apple.product-type.application";
+		};
+		8A0016788D44D42A57987E45 /* LEDMESSENGERUITests_iPad */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C39E0C590D158E21692AFBDD /* Build configuration list for PBXNativeTarget "LEDMESSENGERUITests_iPad" */;
+			buildPhases = (
+				0BDD9E09D483B76B603FAD69 /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				4BA473597EE91164C0D1F78D /* PBXTargetDependency */,
+			);
+			name = LEDMESSENGERUITests_iPad;
+			productName = LEDMESSENGERUITests_iPad;
+			productReference = AFF1FEB24D9992A484745641 /* LEDMESSENGERUITests_iPad.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+		EB4F5BE79D599AF881367554 /* LEDMESSENGERTests_iPad */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4F9D67DFBFAE63C94616CCFB /* Build configuration list for PBXNativeTarget "LEDMESSENGERTests_iPad" */;
+			buildPhases = (
+				AC4821FBCF5548E300D753F2 /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				AC38767064D15A4E74C27470 /* PBXTargetDependency */,
+			);
+			name = LEDMESSENGERTests_iPad;
+			productName = LEDMESSENGERTests_iPad;
+			productReference = E5EA04ED9D13B820CB9E45D9 /* LEDMESSENGERTests_iPad.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		DE625092930269069764757F /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 1630;
+				TargetAttributes = {
+					19BBBAE6E74899C62F69FC23 = {
+						DevelopmentTeam = "";
+					};
+					4FAF5621871F3C3E6E95B865 = {
+						DevelopmentTeam = "";
+					};
+					559A8477428F0F41D421E85B = {
+						DevelopmentTeam = "";
+						TestTargetID = 19BBBAE6E74899C62F69FC23;
+					};
+					8A0016788D44D42A57987E45 = {
+						DevelopmentTeam = "";
+						TestTargetID = 6C94F9B5280FA8631B99D0CC;
+					};
+					EB4F5BE79D599AF881367554 = {
+						DevelopmentTeam = "";
+					};
+				};
+			};
+			buildConfigurationList = 2DD9D2B12BE4365FFCE83CBB /* Build configuration list for PBXProject "LEDMESSENGER" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				Base,
+				en,
+			);
+			mainGroup = 2E36C92CBA186236E1DC7714;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				EB4F5BE79D599AF881367554 /* LEDMESSENGERTests_iPad */,
+				4FAF5621871F3C3E6E95B865 /* LEDMESSENGERTests_macOS */,
+				8A0016788D44D42A57987E45 /* LEDMESSENGERUITests_iPad */,
+				559A8477428F0F41D421E85B /* LEDMESSENGERUITests_macOS */,
+				6C94F9B5280FA8631B99D0CC /* LEDMESSENGER_iPad */,
+				19BBBAE6E74899C62F69FC23 /* LEDMESSENGER_macOS */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		2238C4353E9AF1736309855E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				18FDC31CF900CCAF289DA0D3 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F3E816E1FA04B729C8CE173B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8FD5813065E91E27A09F6DEE /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		0BDD9E09D483B76B603FAD69 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		26EA10D2BDAE1E6C019FE6A0 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A96C5E66DBEDCEF0EA7F07CE /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BCFE3B674DF0920FF9D8CCF4 /* AppSettings.swift in Sources */,
+				2574B9AD57D4ECF0599075ED /* AppViewModel.swift in Sources */,
+				13BE159093B3F5863B23C8E5 /* AppearanceSettings.swift in Sources */,
+				CFC1C062FDAD2E79F3CE3FC1 /* ConnectionState.swift in Sources */,
+				E18AC9F3C04F8EC1B9CCB9B6 /* ContentView.swift in Sources */,
+				08A659BA923CFA43F944530F /* CustomizationSection.swift in Sources */,
+				7C3C7B1D780AD7547AA38D55 /* CustomizationView.swift in Sources */,
+				8CFF5830C41862E27E5C85F4 /* FormattingSettings.swift in Sources */,
+				F71CE076BA516CAC93A1BC70 /* LEDMessageApp.swift in Sources */,
+				FC8E4F5A74EC40B7DCE0310E /* LabelType.swift in Sources */,
+				F7C6F97F5838CAE3AE1360E7 /* LineBreakMode.swift in Sources */,
+				3DC45808B07521B726FC59CB /* Message.swift in Sources */,
+				B054BE8914A90663742CE839 /* MessageCardView.swift in Sources */,
+				C7E4B8133110F6E906B951D8 /* MessageModels.swift in Sources */,
+				2DE4430ECB4CFA551C1BDDAD /* MessageQueueView.swift in Sources */,
+				5AC89571BE012C79E38B91F3 /* MessageStatus.swift in Sources */,
+				4C76C948FCD76BD18E9A876B /* MessageTemplate.swift in Sources */,
+				A89AA059DBBE09B29F6D52FC /* MessageViewModel.swift in Sources */,
+				B692323D6D20EF71F2E7EA98 /* NewMessageView.swift in Sources */,
+				70536EC9922D207D1DE2CA4C /* Notification+Extensions.swift in Sources */,
+				6B63DB73B5171464EEB34560 /* OSCAddress.swift in Sources */,
+				CB3328293F9A3A5F34F18D29 /* OSCArgument.swift in Sources */,
+				0018F3550D1A9A0AB99AF9D2 /* OSCBundle.swift in Sources */,
+				B91A53DF370B4DF0BBAB036E /* OSCError.swift in Sources */,
+				F12073F61DC87D77C158EFAC /* OSCMessage.swift in Sources */,
+				D55E45090A7F8345F75C80DA /* OSCModels.swift in Sources */,
+				771ADD4C2A01D4011F3F9E78 /* OSCService.swift in Sources */,
+				4A27051FC97F9F5493A47F7E /* OSCServiceProtocol.swift in Sources */,
+				CCF2535B13676BEFB43ECDB8 /* OSCSettings.swift in Sources */,
+				609B84D484B914B58208BD25 /* OSCTypeTag.swift in Sources */,
+				DA287810A6810DF8C6C07E32 /* PeerService.swift in Sources */,
+				12BD99D75D5D7F16B7DB7017 /* PeerStatusView.swift in Sources */,
+				5CC2CF7EE311F6B07D9C98E7 /* ResolumeOSCService.swift in Sources */,
+				4B8F47B7D3FAC801A137A4A8 /* SettingsManager.swift in Sources */,
+				D4B63A5E0C07214EBECFFBF8 /* SetupView.swift in Sources */,
+				5BD396509A3E10C6381D2F02 /* Theme.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AC4821FBCF5548E300D753F2 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CA28DDA7275BEE7151D49400 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				074089C031EF93D6A15AB633 /* AppSettings.swift in Sources */,
+				3D4DB462A0C846CF973E27C4 /* AppViewModel.swift in Sources */,
+				96A072CF9BA47C1E96E73CC7 /* AppearanceSettings.swift in Sources */,
+				C77CBBA254BDDBB82140FB9C /* ConnectionState.swift in Sources */,
+				7FED445AD79F733E2051AB7D /* ContentView.swift in Sources */,
+				90C806C4500F69E9EBD9C1A6 /* CustomizationSection.swift in Sources */,
+				40FED67DFE9A060C9F767E72 /* CustomizationView.swift in Sources */,
+				CCAC0514FC4048DAD1903976 /* FormattingSettings.swift in Sources */,
+				B9DDFC0C7B124C4D70902B56 /* LEDMessageApp.swift in Sources */,
+				D875D2F76633C0CFB69BE78D /* LabelType.swift in Sources */,
+				7C1A01BEA72DA8DBE23E1106 /* LineBreakMode.swift in Sources */,
+				8A35CA90FE428D692F8FDA6B /* Message.swift in Sources */,
+				6C78723D8D79C49C94FCABD1 /* MessageCardView.swift in Sources */,
+				DE1C57333BF0A742FE0B6C11 /* MessageModels.swift in Sources */,
+				01A90806D58E270ED8F12FAB /* MessageQueueView.swift in Sources */,
+				306C1A402255CE628CE6BDAF /* MessageStatus.swift in Sources */,
+				CD998947E6216CF9ED4BDE78 /* MessageTemplate.swift in Sources */,
+				4961EB46F1B00CC6277D7293 /* MessageViewModel.swift in Sources */,
+				820F42D75D9846DEC1B6D208 /* NewMessageView.swift in Sources */,
+				68646642D30C540D486C41A5 /* Notification+Extensions.swift in Sources */,
+				6A4FC576C388D612B347D261 /* OSCAddress.swift in Sources */,
+				E7884921669460784792A96C /* OSCArgument.swift in Sources */,
+				FB8B134EFE520BEA07FB8265 /* OSCBundle.swift in Sources */,
+				63AE6501248CED19C0096810 /* OSCError.swift in Sources */,
+				C89AF6095944C23EF7F482D2 /* OSCMessage.swift in Sources */,
+				A16EA8B992FC990102A2364C /* OSCModels.swift in Sources */,
+				86A933A6E54590AC6139469A /* OSCService.swift in Sources */,
+				8ED09607165E4C4091861198 /* OSCServiceProtocol.swift in Sources */,
+				1297E4E2C7A14A9E1FD1EEDC /* OSCSettings.swift in Sources */,
+				DFF8CEA45E1D05B3C632FC97 /* OSCTypeTag.swift in Sources */,
+				F1D9364E7CF7115B40E98B5C /* PeerService.swift in Sources */,
+				02A5F115A8E84BBA1CDB50C2 /* PeerStatusView.swift in Sources */,
+				DE6BA4D22C4DA9AEC374052F /* ResolumeOSCService.swift in Sources */,
+				CAD8B9075B4A8DEEBCF35DB1 /* SettingsManager.swift in Sources */,
+				FBF847800C15BF2007E91E7F /* SetupView.swift in Sources */,
+				E62BBEA20DB2BC6043A00077 /* Theme.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CFF6C907DB65E17C9E817D26 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		4BA473597EE91164C0D1F78D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 6C94F9B5280FA8631B99D0CC /* LEDMESSENGER_iPad */;
+			targetProxy = C1B5C0E848F61E436BE3430D /* PBXContainerItemProxy */;
+		};
+		695B490BF75AE446BF3AAA78 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 19BBBAE6E74899C62F69FC23 /* LEDMESSENGER_macOS */;
+			targetProxy = A0974825B59E170FFD4E7139 /* PBXContainerItemProxy */;
+		};
+		6CDA66D634DE6861277B1CF3 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 19BBBAE6E74899C62F69FC23 /* LEDMESSENGER_macOS */;
+			targetProxy = 05D6EE46839201F5C9AAE9C3 /* PBXContainerItemProxy */;
+		};
+		AC38767064D15A4E74C27470 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 6C94F9B5280FA8631B99D0CC /* LEDMESSENGER_iPad */;
+			targetProxy = 3419838F3ECCB1C908FACA46 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		0858D7CA64A7E81D1C735108 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				COMBINE_HIDPI_IMAGES = YES;
+				DEAD_CODE_STRIPPING = YES;
+				INFOPLIST_FILE = LEDMESSENGERTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.led.messenger.LEDMESSENGERTests;
+				PRODUCT_NAME = LEDMESSENGERTests_macOS;
+				SDKROOT = macosx;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/LEDMESSENGER_macOS.app/Contents/MacOS/LEDMESSENGER_macOS";
+			};
+			name = Release;
+		};
+		121F374B4E986BB8EB19280D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = LEDMESSENGER/LEDMESSENGER.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = BU3U2MQQSU;
+				ENABLE_PREVIEWS = YES;
+				INFOPLIST_FILE = LEDMESSENGER/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.led.messenger.LEDMESSENGER;
+				PRODUCT_NAME = LEDMESSENGER_iPad;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				TARGETED_DEVICE_FAMILY = 2;
+			};
+			name = Release;
+		};
+		1838402C82A219EE30078082 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				COMBINE_HIDPI_IMAGES = YES;
+				DEAD_CODE_STRIPPING = YES;
+				INFOPLIST_FILE = LEDMESSENGERTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.led.messenger.LEDMESSENGERTests;
+				PRODUCT_NAME = LEDMESSENGERTests_macOS;
+				SDKROOT = macosx;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/LEDMESSENGER_macOS.app/Contents/MacOS/LEDMESSENGER_macOS";
+			};
+			name = Debug;
+		};
+		20A5B5B57FBB925FFCD8FFB1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = LEDMESSENGERTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.led.messenger.LEDMESSENGERTests;
+				PRODUCT_NAME = LEDMESSENGERTests_iPad;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/LEDMESSENGER_iPad.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/LEDMESSENGER_iPad";
+			};
+			name = Release;
+		};
+		794CCC8EE5272777B8F958D4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = LEDMESSENGERTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.led.messenger.LEDMESSENGERTests;
+				PRODUCT_NAME = LEDMESSENGERTests_iPad;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/LEDMESSENGER_iPad.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/LEDMESSENGER_iPad";
+			};
+			name = Debug;
+		};
+		8462CD10FFC5F74AD630B81D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = LEDMESSENGERUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.led.messenger.LEDMESSENGERUITests;
+				PRODUCT_NAME = LEDMESSENGERUITests_iPad;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = LEDMESSENGER_iPad;
+			};
+			name = Debug;
+		};
+		90C25932FB7F047CD2F5A326 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = LEDMESSENGER/LEDMESSENGER.entitlements;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEAD_CODE_STRIPPING = YES;
+				ENABLE_PREVIEWS = YES;
+				INFOPLIST_FILE = LEDMESSENGER/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.led.messenger.LEDMESSENGER;
+				PRODUCT_NAME = LEDMESSENGER_macOS;
+				SDKROOT = macosx;
+				SWIFT_COMPILATION_MODE = wholemodule;
+			};
+			name = Release;
+		};
+		9E9285F13F3D8F93FC806904 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = LEDMESSENGER/LEDMESSENGER.entitlements;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEAD_CODE_STRIPPING = YES;
+				ENABLE_PREVIEWS = YES;
+				INFOPLIST_FILE = LEDMESSENGER/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.led.messenger.LEDMESSENGER;
+				PRODUCT_NAME = LEDMESSENGER_macOS;
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+			};
+			name = Debug;
+		};
+		B64DBC6960A05531DC3F28A2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentPurple;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = "";
+				ENABLE_PREVIEWS = YES;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"DEBUG=1",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		B89E225F04B5B24900F98E99 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentPurple;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = "";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_PREVIEWS = YES;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		CB726526685783F4A63F2DC2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				COMBINE_HIDPI_IMAGES = YES;
+				DEAD_CODE_STRIPPING = YES;
+				INFOPLIST_FILE = LEDMESSENGERUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.led.messenger.LEDMESSENGERUITests;
+				PRODUCT_NAME = LEDMESSENGERUITests_macOS;
+				SDKROOT = macosx;
+				TEST_TARGET_NAME = LEDMESSENGER_macOS;
+			};
+			name = Debug;
+		};
+		DB8ECB41ACF4BCF060C1996E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = LEDMESSENGER/LEDMESSENGER.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = BU3U2MQQSU;
+				ENABLE_PREVIEWS = YES;
+				INFOPLIST_FILE = LEDMESSENGER/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.led.messenger.LEDMESSENGER;
+				PRODUCT_NAME = LEDMESSENGER_iPad;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				TARGETED_DEVICE_FAMILY = 2;
+			};
+			name = Debug;
+		};
+		EF890F6B6AFB8EAF0881C3D1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = LEDMESSENGERUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.led.messenger.LEDMESSENGERUITests;
+				PRODUCT_NAME = LEDMESSENGERUITests_iPad;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = LEDMESSENGER_iPad;
+			};
+			name = Release;
+		};
+		F85B187CB18B9A0EB2A246A7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				COMBINE_HIDPI_IMAGES = YES;
+				DEAD_CODE_STRIPPING = YES;
+				INFOPLIST_FILE = LEDMESSENGERUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.led.messenger.LEDMESSENGERUITests;
+				PRODUCT_NAME = LEDMESSENGERUITests_macOS;
+				SDKROOT = macosx;
+				TEST_TARGET_NAME = LEDMESSENGER_macOS;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		2DD9D2B12BE4365FFCE83CBB /* Build configuration list for PBXProject "LEDMESSENGER" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B64DBC6960A05531DC3F28A2 /* Debug */,
+				B89E225F04B5B24900F98E99 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		4F9D67DFBFAE63C94616CCFB /* Build configuration list for PBXNativeTarget "LEDMESSENGERTests_iPad" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				794CCC8EE5272777B8F958D4 /* Debug */,
+				20A5B5B57FBB925FFCD8FFB1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		6E5CE7582079EB3DB54C6A61 /* Build configuration list for PBXNativeTarget "LEDMESSENGERUITests_macOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CB726526685783F4A63F2DC2 /* Debug */,
+				F85B187CB18B9A0EB2A246A7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		A191B4EB2EB694F7EEFF9176 /* Build configuration list for PBXNativeTarget "LEDMESSENGER_macOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9E9285F13F3D8F93FC806904 /* Debug */,
+				90C25932FB7F047CD2F5A326 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		C39E0C590D158E21692AFBDD /* Build configuration list for PBXNativeTarget "LEDMESSENGERUITests_iPad" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8462CD10FFC5F74AD630B81D /* Debug */,
+				EF890F6B6AFB8EAF0881C3D1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		E994736BB4DB7A741D7787E0 /* Build configuration list for PBXNativeTarget "LEDMESSENGERTests_macOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1838402C82A219EE30078082 /* Debug */,
+				0858D7CA64A7E81D1C735108 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		F9121BC37935C6783E9F66D8 /* Build configuration list for PBXNativeTarget "LEDMESSENGER_iPad" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DB8ECB41ACF4BCF060C1996E /* Debug */,
+				121F374B4E986BB8EB19280D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = DE625092930269069764757F /* Project object */;
+}
