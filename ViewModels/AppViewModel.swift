@@ -172,19 +172,41 @@ final class AppViewModel: ObservableObject, PeerServiceDelegate {
         )
         self.messageViewModel = messages
         
-        // Load app mode settings
+        // Load app mode settings for iPad
         #if os(iOS)
-        appMode = settings.settings.mode.currentMode
-        
-        // ALWAYS show mode selection on iPad
-        shouldShowModeSelection = true
-        
-        // Clear first-launch flag to ensure mode selection shows
-        UserDefaults.standard.set(false, forKey: "com.ledmessenger.hasLaunchedBefore")
-        UserDefaults.standard.set(false, forKey: "com.ledmessenger.completedModeSetup")
-        
-        // Print debug info
-        print("DEBUG: Mode selection is being set to \(shouldShowModeSelection)")
+        // Check for stored mode selection from previous session
+        if let selectedMode = UserDefaults.standard.string(forKey: "selectedAppMode") {
+            // Process stored mode selection
+            if selectedMode == "solo" {
+                // Solo mode - set proper state for dedicated iPad Solo view
+                appMode = .solo
+                setupCompleted = false  // Always start with setup in solo mode
+                initialSetupCompletedThisSession = false
+                appState = .setup
+                shouldShowModeSelection = false
+                logger.info("Initialized in SOLO mode from UserDefaults")
+                print("DEBUG: Loading previously selected SOLO mode, state=\(appState)")
+            } else {
+                // Paired mode - go directly to message management
+                appMode = .paired
+                setupCompleted = true
+                appState = .messageManagement
+                shouldShowModeSelection = false
+                logger.info("Initialized in PAIRED mode from UserDefaults")
+                print("DEBUG: Loading previously selected PAIRED mode, state=\(appState)")
+            }
+        } else {
+            // No selected mode yet - show mode selection
+            appMode = settings.settings.mode.currentMode
+            shouldShowModeSelection = true
+            
+            // Clear setup flags to ensure mode selection shows
+            UserDefaults.standard.removeObject(forKey: "com.ledmessenger.hasLaunchedBefore")
+            UserDefaults.standard.removeObject(forKey: "com.ledmessenger.completedModeSetup")
+            
+            logger.info("No mode selection found, showing mode selector")
+            print("DEBUG: No stored mode selection, showing mode selector")
+        }
         #endif
         
         // Configure platform-specific initial app state
@@ -225,8 +247,13 @@ final class AppViewModel: ObservableObject, PeerServiceDelegate {
             .store(in: &cancellables)
         
         // Start OSC connection
-        Task {
-            await oscService.connect()
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
+            
+            Task { @MainActor [weak self] in
+                guard let self = self else { return }
+                await self.oscService.connect()
+            }
         }
         
         // Initialize peer-to-peer connectivity based on mode
@@ -303,7 +330,8 @@ final class AppViewModel: ObservableObject, PeerServiceDelegate {
             }
             
             // Notify peers of the added message
-            Task { @MainActor in
+            Task { @MainActor [weak self] in
+                guard let self = self else { return }
                 self.peerService?.notifyMessageAdded(message)
             }
         }
@@ -319,7 +347,8 @@ final class AppViewModel: ObservableObject, PeerServiceDelegate {
             }
             
             // Notify peers of the cancelled message
-            Task { @MainActor in
+            Task { @MainActor [weak self] in
+                guard let self = self else { return }
                 self.peerService?.notifyMessageCancelled(messageId)
             }
         }
@@ -339,7 +368,8 @@ final class AppViewModel: ObservableObject, PeerServiceDelegate {
             let currentSlot = notification.userInfo?["currentSlot"] as? Int
             
             // Notify peers of the sent message including the current slot
-            Task { @MainActor in
+            Task { @MainActor [weak self] in
+                guard let self = self else { return }
                 self.peerService?.notifyMessageSent(message, currentClipSlot: currentSlot)
             }
         }
@@ -358,7 +388,8 @@ final class AppViewModel: ObservableObject, PeerServiceDelegate {
             let currentSlot = notification.userInfo?["currentSlot"] as? Int
             
             // Notify peers of the updated message
-            Task { @MainActor in
+            Task { @MainActor [weak self] in
+                guard let self = self else { return }
                 self.peerService?.notifyMessageSent(message, currentClipSlot: currentSlot)
             }
         }
@@ -374,7 +405,8 @@ final class AppViewModel: ObservableObject, PeerServiceDelegate {
             }
             
             // Notify peers of the cleared queue
-            Task { @MainActor in
+            Task { @MainActor [weak self] in
+                guard let self = self else { return }
                 self.peerService?.notifyQueueCleared()
             }
         }
@@ -387,86 +419,164 @@ final class AppViewModel: ObservableObject, PeerServiceDelegate {
      * Validates connection to Resolume and transitions to message management
      */
     func completeSetup() {
-        Task {
-            // Start setup process
-            setupStatusMessage = "Initializing connection..."
+        // Use dispatch queue for better thread management
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
             
-            // Update OSC service with current settings
-            oscService.updateEndpoint(
-                host: settingsManager.settings.osc.host,
-                port: settingsManager.settings.osc.port
-            )
+            // Start setup process on main thread for UI
+            self.setupStatusMessage = "Initializing connection..."
             
-            // Update Resolume service with current settings
-            // Creates a new instance since properties are immutable
-            let updatedService = resolumeService.updateConfiguration(
-                layer: settingsManager.settings.osc.layer,
-                startingClip: settingsManager.settings.osc.startingClip,
-                clearClip: settingsManager.settings.osc.clearClip
-            )
-            
-            // Replace services with updated instances
-            self.resolumeService = updatedService
-            self.messageViewModel.updateResolumeService(updatedService)
-            
-            // Try up to 3 connection attempts
-            for attempt in 1...3 {
-                setupStatusMessage = "Connecting (attempt \(attempt)/3)..."
-                await oscService.connect()
+            // Launch the setup task
+            Task { @MainActor [weak self] in
+                guard let self = self else { return }
                 
-                // Poll connection status for up to 2 seconds
-                for _ in 0..<20 {
-                    if connectionStatus == .connected {
+                // Get all settings safely once
+                let host = self.settingsManager.settings.osc.host
+                let port = self.settingsManager.settings.osc.port
+                let layer = self.settingsManager.settings.osc.layer
+                let startingClip = self.settingsManager.settings.osc.startingClip
+                let clearClip = self.settingsManager.settings.osc.clearClip
+                
+                // Update OSC service with current settings
+                self.oscService.updateEndpoint(
+                    host: host,
+                    port: port
+                )
+                
+                // Update Resolume service with current settings
+                // Creates a new instance since properties are immutable
+                let updatedService = self.resolumeService.updateConfiguration(
+                    layer: layer,
+                    startingClip: startingClip,
+                    clearClip: clearClip
+                )
+                
+                // Use MainActor for UI updates
+                await MainActor.run { [weak self] in
+                    guard let self = self else { return }
+                    
+                    // Replace services with updated instances
+                    self.resolumeService = updatedService
+                    self.messageViewModel.updateResolumeService(updatedService)
+                }
+                
+                // Try up to 3 connection attempts with safe thread handling
+                for attempt in 1...3 {
+                    // UI update on main thread
+                    await MainActor.run { [weak self] in
+                        guard let self = self else { return }
+                        self.setupStatusMessage = "Connecting (attempt \(attempt)/3)..."
+                    }
+                    
+                    // Connect with await
+                    await self.oscService.connect()
+                    
+                    // Poll connection status for up to 2 seconds
+                    for _ in 0..<20 {
+                        // Safely check connection on main thread
+                        let isConnected = await MainActor.run { [weak self] in
+                            guard let self = self else { return false }
+                            return self.connectionStatus == .connected
+                        }
+                        
+                        if isConnected {
+                            break
+                        }
+                        
+                        try? await Task.sleep(nanoseconds: 100_000_000) // 0.1 seconds
+                    }
+                    
+                    // Check if connected using MainActor to access state safely
+                    let isConnected = await MainActor.run { [weak self] in
+                        guard let self = self else { return false }
+                        return self.connectionStatus == .connected
+                    }
+                    
+                    // Exit retry loop if connected
+                    if isConnected {
                         break
                     }
-                    try? await Task.sleep(nanoseconds: 100_000_000) // 0.1 seconds
                 }
                 
-                // Exit retry loop if connected
-                if connectionStatus == .connected {
-                    break
+                // Check connection state on MainActor
+                let finalConnected = await MainActor.run { [weak self] in
+                    guard let self = self else { return false }
+                    return self.connectionStatus == .connected
                 }
-            }
-            
-            // Verify connection established successfully
-            if connectionStatus == .connected {
-                setupStatusMessage = "Testing connection..."
                 
-                // Only send test messages on first setup this session
-                let shouldSendTestMessages = !initialSetupCompletedThisSession
-                
-                if shouldSendTestMessages {
-                    do {
-                            // Send test pattern to verify communication
-                        let testResult = try await resolumeService.sendTestPattern()
+                // Final result handling
+                await MainActor.run { [weak self] in
+                    guard let self = self else { return }
+                    
+                    // Verify connection established successfully
+                    if finalConnected {
+                        self.setupStatusMessage = "Testing connection..."
                         
-                        if testResult {
-                            setupStatusMessage = "Test pattern successful! Connection verified. Setup complete!"
-                        } else {
-                            setupStatusMessage = "Test pattern completed with errors. Check console for details."
+                        // Only send test messages on first setup this session
+                        let shouldSendTestMessages = !self.initialSetupCompletedThisSession
+                        
+                        // Launch test message task
+                        Task { @MainActor [weak self] in
+                            guard let self = self else { return }
+                            
+                            if shouldSendTestMessages {
+                                do {
+                                    // Send test pattern to verify communication
+                                    let testResult = try await self.resolumeService.sendTestPattern()
+                                    
+                                    // Back to main thread for UI
+                                    await MainActor.run { [weak self] in
+                                        guard let self = self else { return }
+                                        
+                                        if testResult {
+                                            self.setupStatusMessage = "Test pattern successful! Connection verified. Setup complete!"
+                                        } else {
+                                            self.setupStatusMessage = "Test pattern completed with errors. Check console for details."
+                                        }
+                                        
+                                        // Complete setup
+                                        self.finalizeSetup()
+                                    }
+                                } catch {
+                                    // Error handling on main thread
+                                    await MainActor.run { [weak self] in
+                                        guard let self = self else { return }
+                                        self.setupStatusMessage = "Error testing connection: \(error.localizedDescription)"
+                                        self.logger.error("Setup test failed: \(error.localizedDescription)")
+                                        self.finalizeSetup()
+                                    }
+                                }
+                            } else {
+                                // Skip test messages on subsequent setups in this session
+                                await MainActor.run { [weak self] in
+                                    guard let self = self else { return }
+                                    self.setupStatusMessage = "Connection verified. Setup complete! (Test messages skipped)"
+                                    self.finalizeSetup()
+                                }
+                            }
                         }
-                    } catch {
-                        setupStatusMessage = "Error testing connection: \(error.localizedDescription)"
-                        logger.error("Setup test failed: \(error.localizedDescription)")
+                    } else {
+                        // Failed to connect after multiple attempts
+                        self.setupStatusMessage = "Connection failed. Please check settings and try again."
+                        self.logger.error("Setup connection failed")
                     }
-                } else {
-                    // Skip test messages on subsequent setups in this session
-                    setupStatusMessage = "Connection verified. Setup complete! (Test messages skipped)"
                 }
-                
-                // Mark setup as completed both for session and persistently
-                initialSetupCompletedThisSession = true
-                UserDefaults.standard.set(true, forKey: "setupCompleted")
-                setupCompleted = true
-                
-                // Transition to main app interface
-                appState = .messageManagement
-            } else {
-                // Failed to connect after multiple attempts
-                setupStatusMessage = "Connection failed. Please check settings and try again."
-                logger.error("Setup connection failed")
             }
         }
+    }
+    
+    /**
+     * Helper to finalize setup after connection
+     * Extracted to make thread safety clearer
+     */
+    @MainActor private func finalizeSetup() {
+        // Mark setup as completed both for session and persistently
+        initialSetupCompletedThisSession = true
+        UserDefaults.standard.set(true, forKey: "setupCompleted")
+        setupCompleted = true
+        
+        // Transition to main app interface
+        appState = .messageManagement
     }
     
     /**
@@ -523,11 +633,14 @@ final class AppViewModel: ObservableObject, PeerServiceDelegate {
         // Update app mode
         self.appMode = mode
         
+        // Persist the app mode selection to UserDefaults for app restarts
+        UserDefaults.standard.set(mode == .solo ? "solo" : "paired", forKey: "selectedAppMode")
+        
         // Update settings
         settingsManager.updateModeSettings(
             currentMode: mode,
             showModeSelectionOnStartup: false,
-            showModeIndicator: false  // Don't show mode indicators as requested
+            showModeIndicator: true  // Show mode indicators for clarity
         )
         
         // Record that mode selection was completed successfully
@@ -535,6 +648,9 @@ final class AppViewModel: ObservableObject, PeerServiceDelegate {
         
         // Handle transition to PAIRED mode
         if mode == .paired {
+            // Stop OSC service that might be running in solo mode
+            handlePairedModeConnection()
+            
             // Start peer connectivity if not already running
             if peerService == nil {
                 startPeerConnectivity()
@@ -556,6 +672,9 @@ final class AppViewModel: ObservableObject, PeerServiceDelegate {
             if peerService != nil {
                 stopPeerConnectivity()
             }
+            
+            // Reset OSC services for direct connection
+            handleSoloModeConnection()
             
             // ALWAYS show setup when selecting SOLO mode
             setupCompleted = false
@@ -645,6 +764,67 @@ final class AppViewModel: ObservableObject, PeerServiceDelegate {
     func toggleDebugInfo() {
         showDebugInfo.toggle()
         settingsManager.updateAppearanceSettings(showDebug: showDebugInfo)
+    }
+    
+    // MARK: - Connection Helper Methods
+    
+    /**
+     * Handles OSC connection for paired mode
+     */
+    private func handlePairedModeConnection() {
+        // First disconnect on main thread, then reconnect
+        oscService.disconnect()
+        
+        // Use dispatch after to add delay on main thread
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { [weak self] in
+            guard let self = self else { return }
+            
+            // Reconnect with Task on main thread
+            Task { @MainActor [weak self] in
+                guard let self = self else { return }
+                await self.oscService.connect()
+            }
+        }
+    }
+    
+    /**
+     * Handles OSC connection for solo mode
+     */
+    private func handleSoloModeConnection() {
+        // First disconnect
+        oscService.disconnect()
+        
+        // Capture configuration values safely on main thread
+        let host = settingsManager.settings.osc.host
+        let port = settingsManager.settings.osc.port
+        let layer = settingsManager.settings.osc.layer
+        let startingClip = settingsManager.settings.osc.startingClip
+        let clearClip = settingsManager.settings.osc.clearClip
+        
+        // Update endpoint settings (thread-safe operation with copied values)
+        oscService.updateEndpoint(host: host, port: port)
+        
+        // Create updated service on main thread
+        let updatedService = resolumeService.updateConfiguration(
+            layer: layer,
+            startingClip: startingClip,
+            clearClip: clearClip
+        )
+        
+        // Replace service and update view model
+        self.resolumeService = updatedService
+        self.messageViewModel.updateResolumeService(updatedService)
+        
+        // Add delay to ensure clean disconnect before reconnecting
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { [weak self] in
+            guard let self = self else { return }
+            
+            // Reconnect on main thread with weak capture
+            Task { @MainActor [weak self] in
+                guard let self = self else { return }
+                await self.oscService.connect()
+            }
+        }
     }
     
     // MARK: - Testing Methods
@@ -766,8 +946,10 @@ final class AppViewModel: ObservableObject, PeerServiceDelegate {
      * Used to recover from temporary network issues
      */
     func forceReconnect() {
-        Task {
-            await oscService.connect()
+        // Already on MainActor, so just execute the reconnection
+        Task { @MainActor [weak self] in 
+            guard let self = self else { return }
+            await self.oscService.connect()
         }
     }
     
@@ -825,7 +1007,9 @@ final class AppViewModel: ObservableObject, PeerServiceDelegate {
         peerService = nil
         
         // Brief delay to allow network resources to reset
-        Task {
+        Task { @MainActor [weak self] in
+            guard let self = self else { return }
+            
             try? await Task.sleep(nanoseconds: 1_000_000_000) // 1 second
             
             // Start a new service instance
@@ -855,9 +1039,11 @@ final class AppViewModel: ObservableObject, PeerServiceDelegate {
      */
     func peerConnectionStatusChanged(_ connected: Bool) {
         // Dispatch to main actor for UI updates
-        Task { @MainActor in
+        Task { @MainActor [weak self] in
+            guard let self = self else { return }
+            
             // Update connection status
-            peerConnectionStatus = connected
+            self.peerConnectionStatus = connected
             
             // Handle new connections
             if connected {
@@ -899,7 +1085,9 @@ final class AppViewModel: ObservableObject, PeerServiceDelegate {
      * @param message The peer sync message to process
      */
     func didReceiveSyncMessage(_ message: PeerSyncMessage) {
-        Task { @MainActor in
+        Task { @MainActor [weak self] in
+            guard let self = self else { return }
+            
             switch message.type {
             case .messageQueueSync:
                 // Full queue replacement
